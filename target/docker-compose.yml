@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  app:
+  image: 'swapi'
+  ports:
+    - '8080:8080'
+  enviroment:
+    - SPRING_DATASOURCE_URL=
+    - SPRING_DATASOURCE_USERNAME=swapi
+    - SPRING_DATASOURCE_PASSWORD=swapi
+db:
+  image: 'postgres:15.2-bullseye'
+  ports:
+    - '5432:5432'
+  container_name: db
+  enviroment:
+    - POSTGRES_USER=swapi
+    - POSTGRES_PASSWORD=swapi
+  volume:
+    - db:/var/lib/postgressql/data 
+volumes:
+  db
