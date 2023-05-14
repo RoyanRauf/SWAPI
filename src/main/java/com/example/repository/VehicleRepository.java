@@ -14,19 +14,23 @@ public class VehicleRepository extends Vehicle{
         this.vehicles = new ArrayList<>();
     }
 
-    public void save(Vehicle vehicle) {
+    public Vehicle save(Vehicle vehicle) {
         vehicles.add(vehicle);
+        return vehicle;
     
     }
     public List<Vehicle> findAll(){
         return new ArrayList<>(vehicles);
     }
-     public Vehicle findById(int id){
+     public Vehicle findById(Long id){
         return vehicles.stream()
         .filter(Vehicle -> Vehicle.getId() == id)
         .findFirst()
         .orElse(null);
         
      }
+
+    public void deleteById(Long id) {
+    }
     
 }
