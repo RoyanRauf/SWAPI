@@ -39,10 +39,8 @@ public class VehicleController {
     public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
         return vehicleService.updatVehicle(id,vehicle);
     }
-    @PutMapping("/{id}")
-    public Vehicle updatVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle){
-        return vehicleService.updatVehicle(id, vehicle);
-    }
+    
+    
     @DeleteMapping("/{id}")
     public void deleteVehicle(@PathVariable Long id , @RequestBody Vehicle vehicle){
         vehicleService.deleteVehicle(id);
