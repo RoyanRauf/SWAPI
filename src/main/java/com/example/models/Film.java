@@ -1,98 +1,70 @@
 package com.example.models;
 
-import java.util.List;
+import java.util.Set;
+
+import org.hibernate.validator.constraints.Range;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import lombok.AccessLevel;
+import lombok.Setter;
 
 public class Film {
-    private String title;
-    private int episode_id;
-    private String director;
-    private String producer;
-    private String release_data;
-    private List<String> characters;
-    private List<String> planets;
-    private List<String> starships;
-    private List<String> vehicles;
-    private List<String> species;
-    private String created;
-    private String edited;
-    private String url;
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public int getEpisode_id() {
-		return episode_id;
-	}
-	public void setEpisode_id(int episode_id) {
-		this.episode_id = episode_id;
-	}
-	public String getDirector() {
-		return director;
-	}
-	public void setDirector(String director) {
-		this.director = director;
-	}
-	public String getProducer() {
-		return producer;
-	}
-	public void setProducer(String producer) {
-		this.producer = producer;
-	}
-	public String getRelease_data() {
-		return release_data;
-	}
-	public void setRelease_data(String release_data) {
-		this.release_data = release_data;
-	}
-	public List<String> getCharacters() {
-		return characters;
-	}
-	public void setCharacters(List<String> characters) {
-		this.characters = characters;
-	}
-	public List<String> getPlanets() {
-		return planets;
-	}
-	public void setPlanets(List<String> planets) {
-		this.planets = planets;
-	}
-	public List<String> getStarships() {
-		return starships;
-	}
-	public void setStarships(List<String> starships) {
-		this.starships = starships;
-	}
-	public List<String> getVehicles() {
-		return vehicles;
-	}
-	public void setVehicles(List<String> vehicles) {
-		this.vehicles = vehicles;
-	}
-	public List<String> getSpecies() {
-		return species;
-	}
-	public void setSpecies(List<String> species) {
-		this.species = species;
-	}
-	public String getCreated() {
-		return created;
-	}
-	public void setCreated(String created) {
-		this.created = created;
-	}
-	public String getEdited() {
-		return edited;
-	}
-	public void setEdited(String edited) {
-		this.edited = edited;
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-    
+    @GeneratedValue
+@Setter(AccessLevel.NONE)
+private String name;
+
+
+@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+@JoinColumn(name = "title", referencedColumnName = "title")
+@JsonIgnoreProperties("film")
+private String title;
+
+@Range(min = 0, max = 1000 , message = "episode_id:")
+private Integer episodeId;
+
+@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+@JoinColumn(name = "openingCraw", referencedColumnName = "opening_craw")
+@JsonIgnoreProperties("film")
+private String openingCraw;
+
+@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+@JoinColumn(name = "director", referencedColumnName = "director")
+@JsonIgnoreProperties("film")
+private String director;
+   
+@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+@JoinColumn(name = "producer", referencedColumnName = "producer")
+@JsonIgnoreProperties("film")
+private String producer;
+
+/**
+ *
+ */
+@Range(min = 0000-00-00, max = 9999-12-31 , message = "release_date:")
+private Integer releaseDate;
+
+@ManyToMany
+    @JoinTable(name = "characters", joinColumns = @JoinColumn(name = "characters"), inverseJoinColumns = @JoinColumn(name = "characters"))
+    @JsonIgnore
+    private Set<People> people;
+
+	@ManyToMany
+    @JoinTable(name = "planets", joinColumns = @JoinColumn(name = "planets"), inverseJoinColumns = @JoinColumn(name = "planets"))
+    @JsonIgnore
+    private Set<Homeworld> homeworlds;
+
+	@ManyToMany
+    @JoinTable(name = "vehicles", joinColumns = @JoinColumn(name = "vehicles"), inverseJoinColumns = @JoinColumn(name = "vehicles"))
+    @JsonIgnore
+    private Set<Vehicle> vehicle;
+	
 }

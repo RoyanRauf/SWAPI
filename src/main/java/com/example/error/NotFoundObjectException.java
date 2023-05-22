@@ -19,6 +19,4 @@ public class NotFoundObjectException extends PersonsApiBaseException {
         return id;
     }
 
-
-
 }

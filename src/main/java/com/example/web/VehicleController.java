@@ -15,6 +15,7 @@ import com.example.models.Vehicle;
 import com.example.service.VehicleService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 @RestController
 @RequestMapping("/api/vehicles")
 public class VehicleController {
@@ -23,13 +24,15 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @GetMapping
-    public List<Vehicle> getAllVehicles(){
+    public List<Vehicle> getAllVehicles() {
         return vehicleService.getAllVehicles();
     }
+
     @GetMapping("/{id}")
-    public Vehicle getVehicleById(@PathVariable Long id){
+    public Vehicle getVehicleById(@PathVariable Long id) {
         return vehicleService.getVehicleById(id);
     }
+
     @PostMapping
     public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
         return vehicleService.creatVehicle(vehicle);
@@ -37,12 +40,11 @@ public class VehicleController {
 
     @PutMapping("/{id}")
     public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
-        return vehicleService.updatVehicle(id,vehicle);
+        return vehicleService.updatVehicle(id, vehicle);
     }
-    
-    
+
     @DeleteMapping("/{id}")
-    public void deleteVehicle(@PathVariable Long id , @RequestBody Vehicle vehicle){
+    public void deleteVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
         vehicleService.deleteVehicle(id);
     }
 }

@@ -14,9 +14,8 @@ public class FilmMapper {
         this.objectMapper = new ObjectMapper();
     }
 
-    public Film map(String json) throws IOException, JsonMappingException, JsonProcessingException{
+    public Film map(String json) throws IOException, JsonMappingException, JsonProcessingException {
         return objectMapper.readValue(json, Film.class);
     }
-    
-    
+
 }

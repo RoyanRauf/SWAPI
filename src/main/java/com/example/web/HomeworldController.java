@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.Buffer;
 
-import com.example.models.Homeworld;
 import com.example.web.dto.PeopleResponse;
 
 import io.jsonwebtoken.io.IOException;
@@ -14,7 +12,6 @@ import io.jsonwebtoken.io.IOException;
 public class HomeworldController {
     private static final String CharacterR = null;
     private static final String PeopleR = null;
-    private static final int i = 0;
     private final String SWAPI_BASE_URL = "https://swapi.dev/api/";
 
     public Homeworld getHomeworld(int characterId)throws IOException{
@@ -60,7 +57,7 @@ public class HomeworldController {
     }
     public static void main(String[] args) {
         HomeworldController controller = new HomeworldController();
-        int characterId = i;
+        int characterId = 1;
         try{
             Homeworld homeworld = controller.getHomeworld(characterId);
             System.out.println(homeworld.getName());
@@ -72,7 +69,7 @@ public class HomeworldController {
     private static class CharacterResponse{
         String homeworld;
     }
-    private static class Homeworld{
+    public static class Homeworld{
         String name;
     String rotation_period;
     String orbital_period;

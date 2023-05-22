@@ -1,36 +1,16 @@
 package com.example.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
-
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.example.models.Vehicle;
+@Repository
+public class VehicleRepository extends CrudRepository<Vehicle,UUID>{
 
-public class VehicleRepository extends Vehicle{
-    private final List<Vehicle> vehicles;
 
-    public VehicleRepository() {
-        this.vehicles = new ArrayList<>();
-    }
-
-    public Vehicle save(Vehicle vehicle) {
-        vehicles.add(vehicle);
-        return vehicle;
-    
-    }
-    public List<Vehicle> findAll(){
-        return new ArrayList<>(vehicles);
-    }
-     public Vehicle findById(Long id){
-        return vehicles.stream()
-        .filter(Vehicle -> Vehicle.getId() == id)
-        .findFirst()
-        .orElse(null);
-        
-     }
-
-    public void deleteById(Long id) {
-    }
-    
 }
+
+
+    

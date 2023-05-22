@@ -8,26 +8,26 @@ import org.springframework.stereotype.Service;
 import com.example.models.Vehicle;
 import com.example.repository.VehicleRepository;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @Service
 public class VehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    public List<Vehicle> getAllVehicles(){
+    public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
     }
-    public Vehicle getVehicleById(Long id){
+
+    public Vehicle getVehicleById(Long id) {
         return vehicleRepository.findById(id)
-        .orElseThrow(() -> EntityNotFoundException("Vehicle not found with id: " + id));
+                .orElseThrow(() -> EntityNotFoundException("Vehicle not found with id: " + id));
     }
-    
-    public Vehicle creatVehicle(Vehicle vehicle){
+
+    public Vehicle creatVehicle(Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }
-    public Vehicle updatVehicle(Long id, Vehicle vehicle){
+
+    public Vehicle updatVehicle(Long id, Vehicle vehicle) {
         Vehicle existingVehicle = getVehicleById(id);
         existingVehicle.setName(vehicle.getName());
         existingVehicle.setModel(vehicle.getModel());
@@ -43,9 +43,9 @@ public class VehicleService {
         existingVehicle.setPilots(vehicle.getPilots());
         return vehicleRepository.save(existingVehicle);
     }
+
     public void deleteVehicle(Long id) {
         vehicleRepository.deleteById(id);
     }
 
-   
 }

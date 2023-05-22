@@ -1,7 +1,9 @@
 package com.example.web.dto;
 
 import java.util.List;
+
 import org.springframework.data.domain.Page;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,11 +19,11 @@ public class PersonApiPage<T> {
     public PersonApiPage(Page<T> springPage) {
         this.content = springPage.getContent();
         this.pagination = PaginationMetadata.builder()
-                    .currentPage(springPage.getPageable().getPageNumber())
-                    .pageSize(springPage.getPageable().getPageSize())
-                    .totalElements(springPage.getTotalElements())
-                    .totalPages(springPage.getTotalPages())
-                    .build();
+                .currentPage(springPage.getPageable().getPageNumber())
+                .pageSize(springPage.getPageable().getPageSize())
+                .totalElements(springPage.getTotalElements())
+                .totalPages(springPage.getTotalPages())
+                .build();
     }
 
     @Data
@@ -33,8 +35,4 @@ public class PersonApiPage<T> {
         private Long totalElements;
     }
 
-
-
-    
 }
-
